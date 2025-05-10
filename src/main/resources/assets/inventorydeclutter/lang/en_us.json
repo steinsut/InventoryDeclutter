@@ -1,0 +1,11 @@
+{
+  "inventorydeclutter.screen.inventory": "Inventory",
+  "inventorydeclutter.configuration.panelMinorAxis": "Panel Minor Axis",
+  "inventorydeclutter.configuration.panelMajorAxis": "Panel Major Axis",
+  "inventorydeclutter.configuration.orientation": "Panel Orientation",
+  "inventorydeclutter.configuration.panelElementSize": "Panel Element Size",
+  "inventorydeclutter.configuration.panelY": "Panel Y Coordinate",
+  "inventorydeclutter.configuration.panelX": "Panel X Coordinate",
+  "inventorydeclutter.narration.panel_narration": "Change Inventory Screen",
+  "inventorydeclutter.narration.scrollbar": "Scrollbar"
+}
