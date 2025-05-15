@@ -1,7 +1,7 @@
 package me.steinsut.inventorydeclutter.client.gui;
 
 import me.steinsut.inventorydeclutter.api.entry.IDeclutterEntry;
-import me.steinsut.inventorydeclutter.common.config.Config;
+import me.steinsut.inventorydeclutter.client.config.Config;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.events.ContainerEventHandler;
@@ -11,6 +11,7 @@ import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.gui.navigation.ScreenPosition;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.ARGB;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -23,9 +24,10 @@ public abstract class AbstractEntryPanel extends AbstractWidget implements Conta
     private final int maxMajorAxis;
     private final int elementSize;
 
-    protected List<EntryWidget> entryWidgets;
-    protected List<GuiEventListener> children;
-    protected AbstractWidget focused;
+    private final List<EntryWidget> entryWidgets;
+    private final List<GuiEventListener> children;
+    private List<IDeclutterEntry> entries;
+    private AbstractWidget focused;
 
     private IDeclutterEntry currentEntry;
 
@@ -41,6 +43,7 @@ public abstract class AbstractEntryPanel extends AbstractWidget implements Conta
         this.maxMajorAxis = maxMajorAxis;
         this.elementSize = elementSize;
 
+        this.entries = new ArrayList<>();
         this.children = new ArrayList<>();
         this.entryWidgets = new ArrayList<>();
 
@@ -52,6 +55,10 @@ public abstract class AbstractEntryPanel extends AbstractWidget implements Conta
     }
 
     public void add(IDeclutterEntry entry) {
+        this.entries.add(entry);
+
+        if(!entry.isEntryVisible()) return;
+
         int oldHeight = this.height;
         int oldWidth = this.width ;
 
@@ -103,15 +110,13 @@ public abstract class AbstractEntryPanel extends AbstractWidget implements Conta
 
         this.slider = null;
 
-        List<IDeclutterEntry> entries = this.entryWidgets.stream().collect(
-                ArrayList::new,
-                (ArrayList<IDeclutterEntry> list, EntryWidget widget) -> list.add(widget.getEntry()),
-                ArrayList::addAll);
-
         this.entryWidgets.clear();
         this.children.clear();
 
-        for(IDeclutterEntry entry : entries) {
+        List<IDeclutterEntry> temp = this.entries;
+        this.entries = new ArrayList<>();
+
+        for(IDeclutterEntry entry : temp) {
             this.add(entry);
         }
     }
@@ -186,6 +191,7 @@ public abstract class AbstractEntryPanel extends AbstractWidget implements Conta
     }
 
     @Override
+    @NotNull
     public List<? extends GuiEventListener> children() {
         return this.children;
     }

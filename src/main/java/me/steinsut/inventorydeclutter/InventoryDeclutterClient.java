@@ -3,7 +3,7 @@ package me.steinsut.inventorydeclutter;
 import com.mojang.logging.LogUtils;
 import me.steinsut.inventorydeclutter.api.InventoryDeclutterApi;
 import me.steinsut.inventorydeclutter.client.event.ClientEventHandler;
-import me.steinsut.inventorydeclutter.common.config.Config;
+import me.steinsut.inventorydeclutter.client.config.Config;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;

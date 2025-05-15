@@ -1,4 +1,4 @@
-package me.steinsut.inventorydeclutter.common.config;
+package me.steinsut.inventorydeclutter.client.config;
 
 import java.awt.*;
 
@@ -45,7 +45,7 @@ public class Config
             .defineInRange("panelPadding", 6, 0, Integer.MAX_VALUE);
 
     private static final ModConfigSpec.IntValue PANEL_ELEMENT_PADDING = BUILDER
-            .comment("Amount of space between the elements and the scrollbar")
+            .comment("Amount of space between each element")
             .defineInRange("panelElementPadding", 2, 0, Integer.MAX_VALUE);
 
     private static final ModConfigSpec.IntValue PANEL_SCROLL_MARGIN = BUILDER

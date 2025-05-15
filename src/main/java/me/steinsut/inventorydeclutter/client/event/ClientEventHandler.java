@@ -7,7 +7,7 @@ import me.steinsut.inventorydeclutter.client.gui.AbstractEntryPanel;
 import me.steinsut.inventorydeclutter.client.gui.EntryPanelOrientation;
 import me.steinsut.inventorydeclutter.client.gui.HorizontalEntryPanel;
 import me.steinsut.inventorydeclutter.client.gui.VerticalEntryPanel;
-import me.steinsut.inventorydeclutter.common.config.Config;
+import me.steinsut.inventorydeclutter.client.config.Config;
 import me.steinsut.inventorydeclutter.common.event.IEventHandler;
 import net.minecraft.client.gui.navigation.ScreenAxis;
 import net.minecraft.client.gui.navigation.ScreenPosition;
@@ -60,11 +60,7 @@ public class ClientEventHandler implements IEventHandler {
                                                         pos.y());
 
                     this.entryPanel.setCurrent(entry);
-                    Registries.DECLUTTER_ENTRIES.forEach((e) -> {
-                        if(e.isEntryVisible()) {
-                            this.entryPanel.add(e);
-                        }
-                    });
+                    Registries.DECLUTTER_ENTRIES.forEach((e) -> this.entryPanel.add(e));
                     event.addListener(this.entryPanel);
         });
     }

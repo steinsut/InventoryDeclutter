@@ -1,0 +1,42 @@
+name: Build
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+
+      - name: Setup JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          architecture: 'x64'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Build full build
+        run: ./gradlew build
+
+      - name: Build full API jar
+        run: ./gradlew apiJar
+
+      - name: Build client-only build
+        run: ./gradlew jarClient
+
+      - name: Build client-only API jar
+        run: ./gradlew jarClient
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: Package
+          path: build/libs
+

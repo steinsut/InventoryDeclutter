@@ -1,6 +1,6 @@
 package me.steinsut.inventorydeclutter.client.gui;
 
-import me.steinsut.inventorydeclutter.common.config.Config;
+import me.steinsut.inventorydeclutter.client.config.Config;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.navigation.ScreenPosition;
 
