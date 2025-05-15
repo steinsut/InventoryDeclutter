@@ -28,7 +28,7 @@ public class InventoryDeclutterClient {
         clientEventHandler.registerModBusHandlers(modEventBus);
         clientEventHandler.registerFMLBusHandlers(NeoForge.EVENT_BUS);
 
-        modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+        modContainer.registerConfig(ModConfig.Type.CLIENT, Config.SPEC);
         modContainer.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
     }
 }
