@@ -31,24 +31,6 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
 
-      - name: Build full build
-        run: ./gradlew build
-
-      - name: Build full API jar
-        run: ./gradlew apiJar
-
-      - name: Build client-only build
-        run: ./gradlew jarClient
-
-      - name: Build client-only API jar
-        run: ./gradlew apiJarClient
-
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: Package
-          path: build/libs
-
       - name: Create tag
         uses: actions/github-script@v5
         with:
@@ -67,6 +49,24 @@ jobs:
           fetch-tags: true
           ref: "release-${{ steps.version.outputs.mod_version }}"
 
+      - name: Build full build
+        run: ./gradlew build
+
+      - name: Build full API jar
+        run: ./gradlew apiJar
+
+      - name: Build client-only build
+        run: ./gradlew jarClient
+
+      - name: Build client-only API jar
+        run: ./gradlew apiJarClient
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: Package
+          path: build/libs
+
       - name: Generate a changelog
         uses: orhun/git-cliff-action@v4
         id: git-cliff
@@ -81,6 +81,7 @@ jobs:
           name: "Release ${{ steps.version.outputs.mod_version }}"
           tag: "release-${{ steps.version.outputs.mod_version }}"
           body: "${{ steps.git-cliff.outputs.content }}"
+          replacesArtifacts: 'true'
           makeLatest: 'latest'
           skipIfReleaseExists: 'true'
 
